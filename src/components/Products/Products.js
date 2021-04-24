@@ -4,26 +4,7 @@ import Product from "./Product/Product";
 
 import useStyles from "./styles";
 
-const products = [
-  {
-    id: 1,
-    name: "Shoes",
-    description: "Running shoes.",
-    price: "$5",
-    imgUrl:
-      "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-  },
-  {
-    id: 2,
-    name: "Macbook",
-    description: "Apple macbook.",
-    price: "$10",
-    imgUrl:
-      "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-  },
-];
-
-const Products = () => {
+const Products = ({ products }) => {
   const classes = useStyles();
 
   return (
