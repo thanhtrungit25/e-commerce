@@ -5,8 +5,9 @@ export default makeStyles((theme) => ({
   layout: {
     marginTop: "5%",
     width: "auto",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    // marginLeft: theme.spacing(2),
+    // marginRight: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
       width: 600,
       marginLeft: "auto",
@@ -23,6 +24,11 @@ export default makeStyles((theme) => ({
     },
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5),
+    padding: theme.spacing(2, 2, 4),
+  },
+  spinner: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));

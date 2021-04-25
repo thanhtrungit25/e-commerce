@@ -5,13 +5,15 @@ import {
   MenuItem,
   Grid,
   Typography,
+  Button,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import { useForm, FormProvider } from "react-hook-form";
 import FormInput from "./CustomTextField";
 
 import { commerce } from "../../lib/commerce";
 
-const AddressForm = ({ checkoutToken }) => {
+const AddressForm = ({ checkoutToken, next }) => {
   const [shippingCountries, setShippingCountries] = useState([]);
   const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -55,8 +57,11 @@ const AddressForm = ({ checkoutToken }) => {
         region,
       }
     );
-    setShippingOptions(options);
-    setShippingOption(options[0].id);
+    console.log("options", options);
+    if (options.length) {
+      setShippingOptions(options);
+      setShippingOption(options[0].id);
+    }
   };
 
   useEffect(() => {
@@ -79,13 +84,23 @@ const AddressForm = ({ checkoutToken }) => {
     }
   }, [shippingSubdivision]);
 
-  const onSubmit = () => console.log("onSubmit");
-
   return (
     <>
-      <Typography variant="h6">Shipping Address</Typography>
+      <Typography variant="h6" style={{ padding: "0 20px" }}>
+        Shipping Address
+      </Typography>
       <FormProvider {...methods}>
-        <form onSubmit={onSubmit}>
+        <form
+          style={{ padding: 20 }}
+          onSubmit={methods.handleSubmit((data) =>
+            next({
+              ...data,
+              shippingCountry,
+              shippingSubdivision,
+              shippingOption,
+            })
+          )}
+        >
           <Grid container spacing={3}>
             <FormInput name="firstName" label="First name" />
             <FormInput name="lastName" label="Last name" />
@@ -136,6 +151,15 @@ const AddressForm = ({ checkoutToken }) => {
               </Select>
             </Grid>
           </Grid>
+          <br />
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <Button component={Link} to="/cart" variant="outlined">
+              Back to cart
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              Next
+            </Button>
+          </div>
         </form>
       </FormProvider>
     </>
